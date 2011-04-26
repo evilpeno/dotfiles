@@ -1,0 +1,77 @@
+# --- Window Layout & Options --- #
+background yes
+own_window yes
+own_window_colour brown
+own_window_transparent yes
+own_window_type normal
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+use_spacer right
+use_xft yes
+alignment top_right
+gap_x 10
+gap_y 45
+
+# --- Colours, Sizes, Fonts & Margins --- #
+update_interval 1.0
+maximum_width 250
+stippled_borders 0
+border_margin 9
+border_width 10
+default_color white
+
+# --- Text --- #
+draw_outline no
+draw_borders no
+font Sans:size=8:weight=bold
+uppercase no
+draw_shades yes
+override_utf8_locale yes
+
+TEXT
+${font Sans:size=9:weight=bold}${color gray}System${hr 2}$color${font Sans:size=8:weight=bold}
+${color gray}$nodename ${alignr}${color gray} Uptime$color $uptime
+#${color gray}Kernel$color $kernel ${alignr}${color gray}Type$color $machine
+${font Sans:size=8:weight=bold}${color gray}load ${color white} $loadavg $color
+
+#${font Sans:size=9:weight=bold}${color gray}Processor ${hr 2}$color
+#${font Arial:bold:size=8}${color #ff0000}${execi 99999 cat /proc/cpuinfo | grep "model name" -m1 | cut -d":" -f2 | cut -d" " -f2- | sed 's#Processor ##'}$font$color
+#${color gray}Speed:$color ${execi 20 sensors |grep "Core0 Temp" | cut -d" " -f4}$font$color$alignr${freq_g 2}Ghz ${color #c0ff3e}${execi 20 sensors |grep "Core1 Temp" | cut -d" " -f4} $color${alignr}${color gray}Processes:$color $running_processes/ $processes
+
+${font Sans:size=9:weight=bold}${color gray}CPU Usage ${hr 2}$color
+${color white}1 ${color gray}${cpu cpu0}% ${color white}2 ${color gray}${cpu cpu1}% ${color white}3 ${color gray}${cpu cpu3}% ${color white}4 ${color gray}${cpu cpu4}% $color
+${cpugraph cpu0 25,50 DDDDDD 1992d6 } ${cpugraph cpu1 25,50 DDDDDD 1992d6 } ${cpugraph cpu2 25,50 DDDDDD 1992d6 } ${cpugraph cpu3 25,50 DDDDDD 1992d6 }
+
+${font Sans:size=8:weight=bold}${color gray}CPU Temp ${color white}${acpitemp}С$color
+${font Sans:size=8:weight=bold}${color gray}CPU Fan ${color white} ${ibm_fan} rpm$color
+${font Sans:size=8:weight=bold}${color gray}load ${color white} $loadavg $color
+
+#${font Sans:size=9:weight=bold}${color gray}TOP 5 CPU Users ${hr 2}$color${font Sans:size=8:weight=bold}${color #ff0000}
+#Process ${alignr}ID ${alignr}CPU $color
+#1. ${top name 1} ${alignr}${top pid 1} ${alignr}${top cpu 1}
+#2. ${top name 2} ${alignr}${top pid 2} ${alignr}${top cpu 2}
+#3. ${top name 3} ${alignr}${top pid 3} ${alignr}${top cpu 3}
+#4. ${top name 4} ${alignr}${top pid 4} ${alignr}${top cpu 4}
+#5. ${top name 5} ${alignr}${top pid 5} ${alignr}${top cpu 5}
+${font Sans:size=9:weight=bold}${color gray}RAM & SWAP ${hr 2}$color${font Sans:size=8:weight=bold}
+${color white}RAM$color ${memperc}% ${color #1992D6}${membar 3.180}
+${color white}SWAP$color ${swapperc}% ${color #1992D6}${swapbar 3.180}
+
+${font Sans:size=9:weight=bold}${color gray}LAN (IP: ${addr eth0}) ${hr 2}$color${font Sans:size=8:weight=bold}
+${color white}Down$color ${downspeed eth0}Кb/s${alignr}${color white}Up.$color${alignr} ${upspeed eth0}Кb/s
+${downspeedgraph eth0 25,120 000000 00ff00} ${alignr}${upspeedgraph eth0 25,120 000000 ff0000}$color
+
+${font Sans:size=9:weight=bold}${color gray}Wi-Fi (IP: ${addr wlan0}) ${hr 2}$color${font Sans:size=8:weight=bold}
+${color white}${wireless_essid wlan0}
+${color white}Down$color ${downspeed wlan0}Кb/s${alignr}${color white}Up.$color${alignr} ${upspeed wlan0}Кb/s
+${downspeedgraph wlan0 25,120 000000 00ff00} ${alignr}${upspeedgraph wlan0 25,120 000000 ff0000}$color
+
+${font Sans:size=9:weight=bold}${color gray}Disk ${hr 2}$color${font Sans:size=8:weight=bold}
+${diskiograph DDDDDD 1992d6 -t}
+${color gray}$diskio
+${color gray}/${color white} ${fs_used_perc /}%
+
+${font Sans:size=9:weight=bold}${color gray}Battery ${hr 2}$color${font Sans:size=8:weight=bold}
+${color white}${battery_short BAT0}
+-${battery_time BAT0}
