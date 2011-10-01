@@ -35,16 +35,14 @@ ${color gray}$nodename ${alignr}${color gray} Uptime$color $uptime
 #${color gray}Kernel$color $kernel ${alignr}${color gray}Type$color $machine
 ${font Sans:size=8:weight=bold}${color gray}load ${color white} $loadavg $color
 
-#${font Sans:size=9:weight=bold}${color gray}Processor ${hr 2}$color
-#${font Arial:bold:size=8}${color #ff0000}${execi 99999 cat /proc/cpuinfo | grep "model name" -m1 | cut -d":" -f2 | cut -d" " -f2- | sed 's#Processor ##'}$font$color
-#${color gray}Speed:$color ${execi 20 sensors |grep "Core0 Temp" | cut -d" " -f4}$font$color$alignr${freq_g 2}Ghz ${color #c0ff3e}${execi 20 sensors |grep "Core1 Temp" | cut -d" " -f4} $color${alignr}${color gray}Processes:$color $running_processes/ $processes
+${font Sans:size=9:weight=bold}${color gray}Processor ${hr 2}$color
+${font Arial:bold:size=8}${color #ff0000}${execi 99999 cat /proc/cpuinfo | grep "model name" -m1 | cut -d":" -f2 | cut -d" " -f2- | sed 's#Processor ##'}$font$color
+${color gray}Speed:$color ${execi 20 sensors |grep "Core0 Temp" | cut -d" " -f4}$font$color$alignr${freq_g 2}Ghz ${color #c0ff3e}${execi 20 sensors |grep "Core1 Temp" | cut -d" " -f4} $color${alignr}${color gray}Processes:$color $running_processes/ $processes
 
-${font Sans:size=9:weight=bold}${color gray}CPU Usage ${hr 2}$color
-${color white}1 ${color gray}${cpu cpu0}% ${color white}2 ${color gray}${cpu cpu1}% ${color white}3 ${color gray}${cpu cpu3}% ${color white}4 ${color gray}${cpu cpu4}% $color
-${cpugraph cpu0 25,50 DDDDDD 1992d6 } ${cpugraph cpu1 25,50 DDDDDD 1992d6 } ${cpugraph cpu2 25,50 DDDDDD 1992d6 } ${cpugraph cpu3 25,50 DDDDDD 1992d6 }
-
+${font Sans:size=9:weight=bold}${color gray}CPU Usage ${hr 2}$font$color
+${font Sans:size=6}${color white}1 ${color gray}${cpu cpu0}% ${color white}2 ${color gray}${cpu cpu1}% ${color white}3 ${color gray}${cpu cpu2}% ${color white}4 ${color gray}${cpu cpu3}% ${color white}5 ${color gray}${cpu cpu4}% ${color white}6 ${color gray}${cpu cpu5}% ${color white}7 ${color gray}${cpu cpu6}% ${color white}8 ${color gray}${cpu cpu7}% $font$color
+${cpugraph cpu0 25,25 DDDDDD 1992d6 } ${cpugraph cpu1 25,25 DDDDDD 1992d6 } ${cpugraph cpu2 25,25 DDDDDD 1992d6 } ${cpugraph cpu3 25,25 DDDDDD 1992d6 } ${cpugraph cpu4 25,25 DDDDDD 1992d6 } ${cpugraph cpu5 25,25 DDDDDD 1992d6 } ${cpugraph cpu6 25,25 DDDDDD 1992d6 } ${cpugraph cpu7 25,25 DDDDDD 1992d6 }
 ${font Sans:size=8:weight=bold}${color gray}CPU Temp ${color white}${acpitemp}С$color
-${font Sans:size=8:weight=bold}${color gray}CPU Fan ${color white} ${ibm_fan} rpm$color
 ${font Sans:size=8:weight=bold}${color gray}load ${color white} $loadavg $color
 
 #${font Sans:size=9:weight=bold}${color gray}TOP 5 CPU Users ${hr 2}$color${font Sans:size=8:weight=bold}${color #ff0000}
@@ -72,6 +70,6 @@ ${diskiograph DDDDDD 1992d6 -t}
 ${color gray}$diskio
 ${color gray}/${color white} ${fs_used_perc /}%
 
-${font Sans:size=9:weight=bold}${color gray}Battery ${hr 2}$color${font Sans:size=8:weight=bold}
-${color white}${battery_short BAT0}
--${battery_time BAT0}
+#${font Sans:size=9:weight=bold}${color gray}Battery ${hr 2}$color${font Sans:size=8:weight=bold}
+#${color white}${battery_short BAT0}
+#-${battery_time BAT0}
