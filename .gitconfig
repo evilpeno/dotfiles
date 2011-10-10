@@ -1,0 +1,40 @@
+[user]
+	email = nibrooks@sendoutcards.com
+	name = Nick Brooks
+
+[alias]
+    st = status -s -b
+    ci = commit
+    co = checkout
+    d = diff
+    b = branch -v
+    bc = branch --contains
+    f = fetch --all
+    re = reset --hard @{upstream}
+    short = rev-parse --short
+    m = merge --no-ff
+
+    l = log --oneline --decorate
+    ll = log --stat --decorate --abbrev-commit --date=relative
+    rl = reflog  --date=relative 
+    stat = diff --stat
+
+    serve = "!git daemon --base-path=$(git rev-parse --show-toplevel) --export-all"
+
+    # Show all remote branches that have been merged into master
+    allmerged = "!git branch -r -v --no-abbrev --merged master | \
+        awk '!/master|HEAD/ { print $2,$1 }'"
+
+    ### Custom Git commands (found in ~/bin)
+    # Push only the current branch to the upstream branch
+    p = pushcurrent
+
+    # Show individual diffs for all incoming/outgoing changesets
+    in = pagediffs ..@{u}
+    out = pagediffs @{u}..
+
+[core]
+    excludesfile = /home/peno/.gitignore
+
+[color]
+    ui = auto
