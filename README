@@ -1,4 +1,3 @@
-My dotfiles.  They work for me.  They might not work for you.
+symlink all the files in this directory to your home folder with: lndir -silent $HOME/src/dotfiles $HOME
 
-symlink all the files in this directory to your home folder with: lndir
--silent $HOME/src/dotfiles $HOME
+My dotfiles.  They work for me.  They might not work for you.
