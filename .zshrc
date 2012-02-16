@@ -1,6 +1,12 @@
 #!/bin/zsh
 # Author: Nick Brooks <evilpeno@gmail.com>
 # shamelessly stole snippets from Seth House
+# 
+# Integrated the git status from
+# https://github.com/olivierverdier/zsh-git-prompt
+source ~/.zsh/zshrc.sh
+
+# Setup some colors that I like
 
 fg_purple=%{$'\e[0;35m'%}
 fg_cyan=%{$'\e[0;36m'%}
@@ -10,10 +16,10 @@ fg_white=%{$'\e[1;37m'%}
 #Attributes
 at_normal=%{$'\e[0m'%}
  
-PROMPT="
-${fg_dgray}%n@%m${fg_white}[${fg_cyan}%~${fg_white}]
-[${fg_dgray}%T${fg_white}]:${at_normal}"
- 
+PROMPT='
+${fg_dgray}%n@%m${fg_white}[${fg_cyan}%~${fg_white}] $(git_super_status)
+[${fg_dgray}%T${fg_white}]:${at_normal}'
+
 # {{{ set us up some options
 autoload edit-command-line 
 autoload -U compinit
@@ -104,7 +110,6 @@ alias pssh='ssh -o "ProxyCommand ssh $PSSH_HOST nc -w1 %h %p"'
 # OSX Specific
 if [[ $(uname) == "Darwin" ]]; then
 alias ls='ls -FG'
-    unalias locate
     alias lynx='lynx -cfg=$HOME/.lynx.cfg'
     alias top='top -ocpu'
 fi
