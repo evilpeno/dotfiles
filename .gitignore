@@ -1,6 +1,11 @@
 *~
 *.pyc
 .*swp
+*.swp
+*.out
+*.lock
+tmp*
+.tmp*
 .git/
 .hg/
 .svn/
