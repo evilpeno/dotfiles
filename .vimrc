@@ -1,6 +1,9 @@
 " disable vi settings
 set nocompatible 
 
+set ls=2
+set ruler
+
 " Turn on syntax highlighting
 syntax on
 
