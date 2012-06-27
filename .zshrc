@@ -63,8 +63,9 @@ LANG=en_US.UTF-8
 LC_ALL=$LANG
 LC_COLLATE=C
 
-
-EDITOR=vi
+EDITOR=vim
+export EDITOR
+alias editor=$EDITOR
 
 # Set grep to ignore SCM directories
 if ! $(grep --exclude-dir 2> /dev/null); then
