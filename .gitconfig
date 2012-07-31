@@ -3,9 +3,13 @@
 	name = Nick Brooks
 
 [alias]
-    st = status -s -b
+    pu = pull
+    cam = commit -am
+    ca = commit -a
+    cm = commit -m
     ci = commit
     co = checkout
+    st = status -s -b
     d = diff
     b = branch -v
     bc = branch --contains
@@ -13,7 +17,7 @@
     re = reset --hard @{upstream}
     short = rev-parse --short
     m = merge --no-ff
-
+    g = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     l = log --oneline --decorate
     ll = log --stat --decorate --abbrev-commit --date=relative
     rl = reflog  --date=relative 
