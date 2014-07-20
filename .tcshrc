@@ -1,0 +1,53 @@
+set echo_style = both
+
+
+bindkey -k up history-search-backward
+bindkey -k down history-search-forward
+
+
+set addsuffix
+set autolist = ambiguous
+set autoexpand
+set matchbeep=ambiguous
+set listmaxrows = 10
+set listmax = 50
+
+set prompt="%n@%m:%B%~%b%# "
+
+### aliases 
+alias ls 'ls --color=auto'
+alias ll 'ls -l'
+alias la 'ls -al'
+alias lg 'ls -lga'
+alias cdll 'cd \!$; ll'
+alias l 'less'
+alias m 'more'
+alias po 'popd "\!\!:1*"'
+alias pu 'pushd "\!\!:1*"'
+alias h 'history'
+alias cd.. 'cd ..'
+alias .. 'cd ..'
+alias ... 'cd ..;cd ..'
+alias pwd 'echo $cwd'
+alias vt100 'set term=vt100'
+alias m 'more'
+alias x 'chmod +x "\!\!:1*"; rehash'
+alias cp 'cp -i'
+alias mv 'mv -i'
+alias rm 'rm -i'
+alias md 'mkdir'
+alias rd 'rmdir'
+alias pack 'tar cvf - \!:1 | gzip -9 > \!:1.tar.gz; ls -l \!:1.tar.gz'
+alias www-do 'sudo su www-data -c "\!\!:1*"'
+set path = (\
+	.\
+	/$HOME/bin\
+	/usr/local/sbin\
+	/usr/games\
+	/usr/local/bin\
+	/sbin\
+	/bin\
+	/usr/sbin\
+	/usr/bin\
+	/usr/bin/X11\
+)
