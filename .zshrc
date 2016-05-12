@@ -103,6 +103,8 @@ alias la='ls -lAFh'
 alias ll='ls -lh'
 alias df='df -h'
 alias cp='cp -pi'
+alias flushdns='sudo killall -HUP mDNSResponder'
+alias console='screen /dev/tty.usbserial 9600'
 
 # Quickly ssh through a bastian host without having to hard-code in ~/.ssh/config
 alias pssh='ssh -o "ProxyCommand ssh $PSSH_HOST nc -w1 %h %p"'
