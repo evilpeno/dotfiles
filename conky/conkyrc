@@ -1,0 +1,112 @@
+# --- Layout & Options --- #
+background yes
+own_window yes
+own_window_colour brown
+own_window_type normal
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+use_spacer right
+use_xft yes
+xftfont 123:size=8
+xftalpha 0.1
+alignment top_right
+gap_x 10
+gap_y 45
+total_run_times 0
+
+# --- Colours, Sizes, Fonts & Margins --- #
+minimum_size 250 5
+maximum_width 250
+update_interval 0.5
+default_color gray
+#default_shade_color red
+default_outline_color green
+
+# --- Text --- #
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+no_buffers no
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 1
+override_utf8_locale yes
+text_buffer_size 2048
+imlib_cache_size 0
+
+# --- Misc --- #
+if_up_strictness link
+
+TEXT
+${execi 3600 /home/peno/./getweather.sh }${color1}${font Open Sans Light:size=42}${alignr 10}${execi 3600 jq -r ".query.results.channel.item.condition.temp" ~/.cache/weather.json}°${font}
+${font Nimbus Sans Light:pixelsize=9}${execi 3600 cp -f /home/peno/conky-weather-icons/60x60/$(jq -r ".query.results.channel.item.condition.code" ~/.cache/weather.json).png ~/.cache/weather.png}${image ~/.cache/weather.png -p 5,10 -s 60x60}${color5}
+$font${color DimGray}Currently $alignr${execi 3600 jq -r ".query.results.channel.item.condition.text" ~/.cache/weather.json}${color5}
+$font${color DimGray}Wind $alignr${execi 3600 jq -r ".query.results.channel.wind.speed" ~/.cache/weather.json}${execi 3600 jq -r ".query.results.channel.units.speed" ~/.cache/weather.json}${color5}
+$font${color DimGray}Humidity $alignr${execi 3600 jq -r ".query.results.channel.atmosphere.humidity" ~/.cache/weather.json}%
+${color1}${goto 24}
+${voffset -40}
+${color DimGray}
+${font}
+${font Arial:bold:size=10}${color Tan1}System ${color DarkSlateGray} ${hr 2}
+$font${color DimGray}$nodename 
+#${execi 1000 cat /proc/cpuinfo | grep 'model name' | sed -e 's/model name.*: //'| uniq | cut -c 1-26} $alignr${freq_g cpu0}Ghz
+${execi 99999 cat /proc/cpuinfo | grep "model name" -m1 | cut -d":" -f2 | cut -d" " -f2- | sed 's#Processor ##'}
+Uptime $alignr${uptime}
+
+${font Arial:bold:size=10}${color Tan1}CPU Usage ${color DarkSlateGray}${hr 2}$font${color DimGray}
+#CPU1  ${cpu cpu1}% $alignr CPU3  ${cpu cpu3}%
+#CPU2  ${cpu cpu2}% $alignr CPU4  ${cpu cpu4}%
+${font Arial:size=8}${color gray}1 ${color gray}${cpu cpu0}% ${color gray}2 ${color gray}${cpu cpu1}% ${color gray}3 ${color gray}${cpu cpu2}% ${color gray}4 ${color gray}${cpu cpu3}% ${color gray}5 ${color gray}${cpu cpu4}% ${color gray}6 ${color gray}${cpu cpu5}% ${color gray}7 ${color gray}${cpu cpu6}% ${color gray}8 ${color gray}${cpu cpu7}% $font$color
+${cpugraph cpu0 25,25 DDDDDD 1992d6 } ${cpugraph cpu1 25,25 DDDDDD 1992d6 } ${cpugraph cpu2 25,25 DDDDDD 1992d6 } ${cpugraph cpu3 25,25 DDDDDD 1992d6 } ${cpugraph cpu4 25,25 DDDDDD 1992d6 } ${cpugraph cpu5 25,25 DDDDDD 1992d6 } ${cpugraph cpu6 25,25 DDDDDD 1992d6 } ${cpugraph cpu7 25,25 DDDDDD 1992d6 }
+${font Arial:bold:size=10}${color Tan1}CPU Temp ${color gray}${acpitemp}С$color
+${font Arial:bold:size=10}${color Tan1}load ${color gray} $loadavg $color
+
+
+${font Arial:bold:size=10}${color Tan1}Memory ${color DarkSlateGray}${hr 2}
+$font${color DimGray}Ram $alignc $mem / $memmax $alignr $memperc%
+$membar
+$font${color DimGray}/ $alignc ${fs_used /} / ${fs_size /} $alignr ${fs_free_perc /}%
+${fs_bar /}
+$font${color DimGray}Swap $alignc ${swap} ${swapmax} $alignr ${swapperc}%
+${swapbar}
+
+#${font Arial:bold:size=10}${color Tan1}Top Processes ${color DarkSlateGray}${hr 2}${color DimGray}
+#$font${top_mem name 1}${alignr}${top mem 1} %
+#$font${top_io name 1}${alignr}${top_mem pid 1} ${top cpu 1}% ${top mem 1}%
+#$font${top name 1}$alignr${top cpu 1}%   ${top mem 1}%
+#$font${top name 2}$alignr${top cpu 2}%   ${top mem 2}%
+#$font${top name 3}$alignr${top cpu 3}%   ${top mem 3}%
+#$font${top name 4}$alignr${top cpu 4}%   ${top mem 4}%
+#$font${top name 5}$alignr${top cpu 5}%   ${top mem 5}%
+${if_up eth0}
+#${if_existing /sys/class/net/eth0/operstate up}
+${font Arial:bold:size=10}${color Tan2}LAN ${color DarkSlateGray}${hr 2}
+$font${color DimGray}#IP on eth0 $alignr ${addr eth0}
+Address$alignr ${addr eth0}
+Down $alignr ${downspeed eth0} kb/s
+Up $alignr ${upspeed eth0} kb/s
+Downloaded: $alignr  ${totaldown eth0}
+Uploaded:   $alignr  ${totalup eth0}
+#Downloaded: $alignc${downspeedgraph eth0 10,120  000000 66aaff}$alignr  ${totaldown eth0}
+#Uploaded:     $alignc${upspeedgraph eth0 10,120  000000 aaddff}$alignr  ${totalup eth0}
+${endif}
+
+${font Arial:bold:size=10}${color Tan2}Wi-Fi (IP: ${addr wlan0}}${color DarkSlateGray}${hr 2}
+$font${color DimGray}#IP on wlan0 $alignr ${addr wlan0}
+#Address$alignr ${addr wlan0}
+#Down $alignr ${downspeed wlan0} kb/s
+#Up $alignr ${upspeed wlan0} kb/s
+#Downloaded: $alignr  ${totaldown wlan0}
+#Uploaded:   $alignr  ${totalup wlan0}
+${color white}Down$color ${downspeed eth0}Кb/s${alignr}${color white}Up.$color${alignr} ${upspeed eth0}Кb/s
+${downspeedgraph eth0 25,120 000000 00ff00} ${alignr}${upspeedgraph eth0 25,120 000000 ff0000}$color
+
+${if_running audacious}${font Arial:bold:size=10}${color Tan2}Audacious is ${audacious_status} ${color DarkSlateGray}${hr 2}
+${color #98FB98}${font Droid Serif:size=8}${exec audtool --current-song | fold -w40} ${audacious_position}
+#${audacious_bar}
+${endif}
+
+#${font Arial:bold:size=10}${color Tan2}Fortune of the hour is${color DarkSlateGray}${hr 2}
+#$font${color DimGray}${execi 3600 fortune -s | fold -w40}
