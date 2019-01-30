@@ -66,6 +66,7 @@ LC_COLLATE=C
 EDITOR=vim
 export EDITOR
 alias editor=$EDITOR
+export LSCOLORS='ExGxBxDxCxEgEdxbxgxcxd'
 
 # Set grep to ignore SCM directories
 if ! $(grep --exclude-dir 2> /dev/null); then
