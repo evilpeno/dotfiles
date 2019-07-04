@@ -68,15 +68,6 @@ export EDITOR
 alias editor=$EDITOR
 export LSCOLORS='ExGxBxDxCxEgEdxbxgxcxd'
 
-# Set grep to ignore SCM directories
-if ! $(grep --exclude-dir 2> /dev/null); then
-GREP_OPTIONS="--color --exclude-dir=.svn --exclude=\*.pyc --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.git --exclude=tags"
-else
-GREP_OPTIONS="--color --exclude=\*.svn\* --exclude=\*.pyc --exclude=\*.hg\* --exclude=\*.bzr\* --exclude=\*.git\* --exclude=tags"
-fi
-export GREP_OPTIONS
-
-# }}}
 case $TERM in
     xterm*)
         precmd () {print -Pn "\e]0;%n@%m: %~\a"}
