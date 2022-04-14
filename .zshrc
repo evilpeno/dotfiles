@@ -67,6 +67,7 @@ EDITOR=vim
 export EDITOR
 alias editor=$EDITOR
 export LSCOLORS='ExGxBxDxCxEgEdxbxgxcxd'
+export GIT_CONFIG="$HOME/.gitconfig"
 
 case $TERM in
     xterm*)
@@ -89,12 +90,14 @@ zstyle -e ':completion:*:(ssh|scp|sshfs|ping|telnet|nc|rsync):*' hosts '
 #Aliases
 
 alias vi='vim'
+alias vim='vim -u ~/.vimrc'
 alias ls='ls -F --color'
 alias l='ls -lFh'
 alias la='ls -lAFh'
 alias ll='ls -lh'
 alias df='df -h'
 alias cp='cp -pi'
+alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit'"
 alias flushdns='sudo killall -HUP mDNSResponder'
 alias console='screen /dev/tty.usbserial 9600'
 
@@ -125,4 +128,11 @@ memtotaller() {
 }
 
 # }}}
+
+
+DISABLE_AUTO_TITLE="true"
+tt () {
+    echo -e "\033];$@\007"
+}
+
 # EOF
