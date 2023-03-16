@@ -1,7 +1,8 @@
 [user]
 	email = nibrooks@gmail.com
 	name = Nick Brooks
-
+[init]
+	defaultBranch = main
 [alias]
     pu = pull
     cam = commit -am
